@@ -35,6 +35,10 @@ public class RegistrationSystem {
             e.printStackTrace();
         }
 
+        // Process waiting lists
+        mathCourse.processWaitingList();
+        historyCourse.processWaitingList();
+
         // Print the final state of courses
         System.out.println("\nFinal state of courses:");
         System.out.println("Math Course - Available Seats: " + mathCourse.getAvailableSeats());

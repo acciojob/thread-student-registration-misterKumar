@@ -20,10 +20,24 @@ public class Course {
 
     public synchronized boolean registerStudent(Student student) {
     	//your code goes here
+        if (availableSeats > 0) {
+            availableSeats--;
+            return true;
+        } else {
+            waitingList.offer(student);
+            return false;
+        }
     }
 
     public synchronized void processWaitingList() {
     	//your code goes here
+        while (!waitingList.isEmpty() && availableSeats > 0) {
+            Student student = waitingList.poll();
+            if (student != null) {
+                availableSeats--;
+                student.notifyRegistered(this);
+            }
+        }
     }
 
     public synchronized int getAvailableSeats() {

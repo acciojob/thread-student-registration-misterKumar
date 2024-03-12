@@ -17,5 +17,15 @@ public class Student implements Runnable {
     @Override
     public void run() {
     	//your code goes here
+        for (Course course : courses) {
+            if (course.registerStudent(this)) {
+                System.out.println(name + " registered for " + course.getCourseCode());
+            } else {
+                System.out.println(name + " placed on waiting list for " + course.getCourseCode());
+            }
+        }
+    }
+    public synchronized void notifyRegistered(Course course) {
+        System.out.println(name + " registered from waiting list for " + course.getCourseCode());
     }
 }
